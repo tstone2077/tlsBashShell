@@ -1,3 +1,16 @@
+# To use:
+# . prompt
+# or
+# source prompt
+
+#Easy shortcuts to change the prompt colors
+#Available colors are:
+#   Black, Red, Green, Yellow, Blue, Purple, Cyan, White
+userHostColor=Yellow
+pwdColor=Cyan
+
+#----------------------------------------------------------
+#TODO: Turn this into a meaningful array
 txtBlack='\[\e[0;30m\]' # Black - Regular
 txtRed='\[\e[0;31m\]' # Red
 txtGreen='\[\e[0;32m\]' # Green
@@ -32,6 +45,10 @@ bakCyan='\[\e[46m\]'   # Cyan
 bakWhite='\[\e[47m\]'   # White
 txtReset='\[\e[0m\]'    # Text Reset
 
-export PS1="[${txtYellow} \u ${txtYellow} @${bldYellow} \h${txtReset} ]: ${txtCyan} \w ${txtReset}\n$"
-#git bash
-#export PS1='[\u @\h]: \w$(__git_ps1 " (%s)")]\$ '
+wd="txt$pwdColor"
+txt="txt$userHostColor"
+und="und$userHostColor"
+bak="bak$userHostColor"
+bld="bld$userHostColor"
+
+export PS1="[${!txt} \u ${!txt} @${!bld} \h${txtReset} ]: ${!wd} \w ${txtReset}\n$"
