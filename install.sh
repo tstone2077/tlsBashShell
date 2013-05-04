@@ -48,3 +48,11 @@ if [ $? = 1 ]; then
 else
   echo "found 'exits' in .bash_aliases"
 fi
+
+grep "alias ss=" $HOME/.bash_aliases >/dev/null
+if [ $? = 1 ]; then
+  echo "Adding alias for 'ss' to .bash_aliases"
+  echo "alias ss='. $HOME/.$USER/startScreen'" >> $HOME/.bash_aliases
+else
+  echo "found 'ss' in .bash_aliases"
+fi
