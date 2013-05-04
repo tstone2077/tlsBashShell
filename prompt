@@ -6,27 +6,28 @@
 #Easy shortcuts to change the prompt colors
 #Available colors are:
 #   Black, Red, Green, Yellow, Blue, Purple, Cyan, White
-userHostColor=Yellow
-pwdColor=Cyan
+userColor=txtGreen
+hostColor=undGreen
+wdColor=txtCyan
 
 #----------------------------------------------------------
 #TODO: Turn this into a meaningful array
-txtBlack='\[\e[0;30m\]' # Black - Regular
-txtRed='\[\e[0;31m\]' # Red
-txtGreen='\[\e[0;32m\]' # Green
-txtYellow='\[\e[0;33m\]' # Yellow
-txtBlue='\[\e[0;34m\]' # Blue
-txtPurple='\[\e[0;35m\]' # Purple
-txtCyan='\[\e[0;36m\]' # Cyan
-txtWhite='\[\e[0;37m\]' # White
-bldBlack='\[\e[1;30m\]' # Black - Bold
-bldRed='\[\e[1;31m\]' # Red
-bldGreen='\[\e[1;32m\]' # Green
-bldYellow='\[\e[1;33m\]' # Yellow
-bldBlue='\[\e[1;34m\]' # Blue
-bldPurple='\[\e[1;35m\]' # Purple
-bldCyan='\[\e[1;36m\]' # Cyan
-bldWhite='\[\e[1;37m\]' # White
+bldBlack='\[\e[0;30m\]' # Black - Regular
+bldRed='\[\e[0;31m\]' # Red
+bldGreen='\[\e[0;32m\]' # Green
+bldYellow='\[\e[0;33m\]' # Yellow
+bldBlue='\[\e[0;34m\]' # Blue
+bldPurple='\[\e[0;35m\]' # Purple
+bldCyan='\[\e[0;36m\]' # Cyan
+bldWhite='\[\e[0;37m\]' # White
+txtBlack='\[\e[1;30m\]' # Black - Bold
+txtRed='\[\e[1;31m\]' # Red
+txtGreen='\[\e[1;32m\]' # Green
+txtYellow='\[\e[1;33m\]' # Yellow
+txtBlue='\[\e[1;34m\]' # Blue
+txtPurple='\[\e[1;35m\]' # Purple
+txtCyan='\[\e[1;36m\]' # Cyan
+txtWhite='\[\e[1;37m\]' # White
 undBlack='\[\e[4;30m\]' # Black - Underline
 undRed='\[\e[4;31m\]' # Red
 undGreen='\[\e[4;32m\]' # Green
@@ -35,20 +36,19 @@ undBlue='\[\e[4;34m\]' # Blue
 undPurple='\[\e[4;35m\]' # Purple
 undCyan='\[\e[4;36m\]' # Cyan
 undWhite='\[\e[4;37m\]' # White
-bakBlack='\[\e[40m\]'   # Black - Background
-bakRed='\[\e[41m\]'   # Red
-bakGreen='\[\e[42m\]'   # Green
-bakYellow='\[\e[43m\]'   # Yellow
-bakBlue='\[\e[44m\]'   # Blue
-bakPurple='\[\e[45m\]'   # Purple
-bakCyan='\[\e[46m\]'   # Cyan
-bakWhite='\[\e[47m\]'   # White
-txtReset='\[\e[0m\]'    # Text Reset
+bgBlack='\[\e[40m\]'   # Black - Background
+bgRed='\[\e[41m\]'   # Red
+bgGreen='\[\e[42m\]'   # Green
+bgYellow='\[\e[43m\]'   # Yellow
+bgBlue='\[\e[44m\]'   # Blue
+bgPurple='\[\e[45m\]'   # Purple
+bgCyan='\[\e[46m\]'   # Cyan
+bgWhite='\[\e[47m\]'   # White
 
-wd="txt$pwdColor"
-txt="txt$userHostColor"
-und="und$userHostColor"
-bak="bak$userHostColor"
-bld="bld$userHostColor"
+reset='\[\e[0m\]'    # Text Reset
 
-export PS1="[${!txt} \u ${!txt} @${!bld} \h${txtReset} ]: ${!wd} \w ${txtReset}\n$"
+wd="${!wdColor}\w${reset}"
+user="${!userColor}\u${reset}"
+host="${!hostColor}\h${reset}"
+
+export PS1="[${user} @ ${host} ]: ${wd}\n$"
