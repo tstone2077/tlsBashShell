@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ -z "$TMUX" ]; then
+if [ -z "$TMUX" ] && [ "$TERM" != "screen" ]; then
   existingTmux=$(tmux ls |  cut -f 1 -d ":")
   if [ "" = "$existingTmux" ]; then
     tmux
