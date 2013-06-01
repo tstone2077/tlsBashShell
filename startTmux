@@ -1,0 +1,9 @@
+#!/bin/bash
+if [ -z "$TMUX" ]; then
+  existingTmux=$(tmux ls |  cut -f 1 -d ":")
+  if [ "" = "$existingTmux" ]; then
+    tmux
+  else
+    tmux attach -t $existingTmux
+  fi
+fi

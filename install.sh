@@ -33,7 +33,10 @@ function install_file
 }
 
 install_file $ROOT_DIR $SCRIPT_DIR prompt .bashrc
-install_file $ROOT_DIR $SCRIPT_DIR startScreen .bashrc
+install_file $ROOT_DIR $SCRIPT_DIR startTmux .bashrc
+#install tmux configuration file
+cp $CURDIR/tmux.conf $ROOT/.tmux.conf 2> /dev/null
+cp $CURDIR/vimrc $ROOT/.vimrc 2> /dev/null
 
 #add the alias for the exit screen
 
@@ -41,18 +44,10 @@ if [ ! -f $HOME/.bash_aliases ]; then
   touch $HOME/.bash_aliases
 fi
 
-grep "alias exits=" $HOME/.bash_aliases >/dev/null
-if [ $? = 1 ]; then
-  echo "Adding alias for 'exits' to .bash_aliases"
-  echo "alias exits='screen -D \$STY > /dev/null'" >> $HOME/.bash_aliases
-else
-  echo "found 'exits' in .bash_aliases"
-fi
-
 grep "alias ss=" $HOME/.bash_aliases >/dev/null
 if [ $? = 1 ]; then
   echo "Adding alias for 'ss' to .bash_aliases"
-  echo "alias ss='. $HOME/.$USER/startScreen'" >> $HOME/.bash_aliases
+  echo "alias ss='. $HOME/.$USER/startTmux'" >> $HOME/.bash_aliases
 else
   echo "found 'ss' in .bash_aliases"
 fi
