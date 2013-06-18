@@ -1,9 +1,14 @@
 #!/bin/bash
 if [ -z "$TMUX" ] && [ "$TERM" != "screen" ]; then
-  existingTmux=$(tmux ls |  cut -f 1 -d ":")
-  if [ "" = "$existingTmux" ]; then
-    tmux
-  else
-    tmux attach -t $existingTmux
+  session=$(tmux ls |  cut -f 1 -d ":")
+  if [ "" = "$session" ]; then
+    #create a new session
+    session=$DEFAULT_SESSION_NAME
+    tmux new-session -d -s $session
+    if [ -e "${HOME}/.${USER}/tmuxSession" ]; then
+        . "${HOME}/.${USER}/tmuxSession"
+    fi
   fi
+  tmux attach -t $session
 fi
+
