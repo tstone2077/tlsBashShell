@@ -1,14 +1,17 @@
 #!/bin/bash
+#If tmux is not in the path, add the path here
+TMUX_BIN=tmux
+DEFAULT_SESSION_NAME=${HOSTNAME}
 if [ -z "$TMUX" ] && [ "$TERM" != "screen" ]; then
-  session=$(tmux ls |  cut -f 1 -d ":")
+  session=$($TMUX_BIN ls |  cut -f 1 -d ":")
   if [ "" = "$session" ]; then
     #create a new session
     session=$DEFAULT_SESSION_NAME
-    tmux new-session -d -s $session
+    $TMUX_BIN new-session -d -s $session
     if [ -e "${HOME}/.${USER}/tmuxSession" ]; then
         . "${HOME}/.${USER}/tmuxSession"
     fi
   fi
-  tmux attach -t $session
+  $TMUX_BIN attach -t $session
 fi
 

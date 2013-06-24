@@ -1,0 +1,22 @@
+#!/bin/bash
+SESSION=${HOSTNAME}
+
+tmux send-keys ". ${HOME}/.ssh/ssh-agent-manager.sh" C-m
+tmux send-keys "ssh server1" C-m
+tmux send-keys "clear" C-m
+tmux split-window -h
+tmux send-keys ". ${HOME}/.ssh/ssh-agent-manager.sh" C-m
+tmux send-keys "ssh server2" C-m
+tmux send-keys "export TERM=xterm" C-m
+tmux send-keys "clear" C-m
+tmux split-window -v
+tmux send-keys ". ${HOME}/.ssh/ssh-agent-manager.sh" C-m
+tmux send-keys "clear" C-m
+tmux select-pane -t 0
+tmux split-window -v
+tmux send-keys ". ${HOME}/.ssh/ssh-agent-manager.sh" C-m
+tmux send-keys "ssh server3" C-m
+tmux send-keys "bash" C-m
+tmux send-keys "clear" C-m
+tmux select-pane -t 0
+
