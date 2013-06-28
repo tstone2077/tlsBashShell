@@ -35,7 +35,7 @@ function install_file
 install_file $ROOT_DIR $SCRIPT_DIR prompt .bashrc
 install_file $ROOT_DIR $SCRIPT_DIR startTmux .bashrc
 #install tmux configuration file
-cp $CURDIR/tmux.conf $ROOT/.tmux.conf 2> /dev/null
+cp $CURDIR/tmux.conf $HOME/.tmux.conf 2> /dev/null
 cp $CURDIR/vimrc $ROOT/.vimrc 2> /dev/null
 
 #add the alias for the exit screen
