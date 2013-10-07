@@ -46,13 +46,18 @@ function install_var
    VARNAME=$1
    VARVALUE=$2
    FILE=$3
-   grep "$VARNAME=" $FILE >/dev/null
+   EXPORT=$4
+   EXPORT_TEXT=""
+   if [ ! -z $EXPORT ]; then
+     EXPORT_TEXT="export "
+   fi
+   grep "${EXPORT_TEXT}$VARNAME=" $FILE >/dev/null
    if [ $? = 1 ]; then
-     echo "Adding $VARNAME=$VARVALUE to $FILE"
-     echo $VARNAME=$VARVALUE >> $FILE
+     echo "Adding ${EXPORT_TEXT}$VARNAME=$VARVALUE to $FILE"
+     echo ${EXPORT_TEXT}$VARNAME=$VARVALUE >> $FILE
    else
-     echo "Updating $VARNAME in $FILE"
-     sed -i 's/\($VARNAME\)=.*/\1=$VARVALUE/' $FILE >/dev/null
+     echo "Updating $VARNAME to $VARVALUE in $FILE"
+     sed -i "s/\(${EXPORT_TEXT}$VARNAME\)=.*/\1=$VARVALUE/" $FILE >/dev/null
    fi
 }
 
@@ -96,7 +101,7 @@ cp $CURDIR/tmux.conf $HOME/.tmux.conf 2> /dev/null
 cp $CURDIR/vimrc $ROOT/.vimrc 2> /dev/null
 
 #add vi as the editor of choice
-install_var EDITOR vi $HOME/.bashrc
+install_var EDITOR vi $HOME/.bashrc export
 
 #add the alias for the exit screen
 
