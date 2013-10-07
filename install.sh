@@ -41,6 +41,21 @@ if [ ! -d $ROOT_DIR ]; then
   mkdir $ROOT_DIR
 fi
 
+function install_var
+{
+   VARNAME=$1
+   VARVALUE=$2
+   FILE=$3
+   grep "$VARNAME=" $FILE >/dev/null
+   if [ $? = 1 ]; then
+     echo "Adding $VARNAME=$VARVALUE to $FILE"
+     echo $VARNAME=$VARVALUE >> $FILE
+   else
+     echo "Updating $VARNAME in $FILE"
+     sed -i 's/\($VARNAME\)=.*/\1=$VARVALUE/' $FILE >/dev/null
+   fi
+}
+
 function install_file
 {
   ROOT=$1
@@ -66,14 +81,17 @@ function install_file
 
 install_file $ROOT_DIR $SCRIPT_DIR prompt .bashrc
 #edit the prompt file
-sed -i 's/userColor=.*/userColor=$USERCOLOR/' $ROOT_DIR/prompt
-sed -i 's/hostColor=.*/hostColor=$HOSTCOLOR/' $ROOT_DIR/prompt
-sed -i 's/wdColor=.*/wdColor=$WDCOLOR/' $ROOT_DIR/prompt
+install_var userColor $USERCOLOR $ROOT_DIR/prompt
+install_var hostColor $HOSTCOLOR $ROOT_DIR/prompt
+install_var wdColor $WDCOLOR $ROOT_DIR/prompt
 
 install_file $ROOT_DIR $SCRIPT_DIR startTmux .bashrc
 #install tmux configuration file
 cp $CURDIR/tmux.conf $HOME/.tmux.conf 2> /dev/null
 cp $CURDIR/vimrc $ROOT/.vimrc 2> /dev/null
+
+#add vi as the editor of choice
+install_var EDITOR vi $HOME/.bashrc
 
 #add the alias for the exit screen
 
