@@ -61,10 +61,14 @@ function install_file
   ROOT=$1
   CURDIR=$2
   FILE=$3
-  FILE_TO_SOURCE=$4
+  NEW_FILE_NAME=$4
+  FILE_TO_SOURCE=$5
   CURRENT_FILE=$ROOT/$FILE
 
-  cp $CURDIR/$FILE $ROOT/$FILE 2> /dev/null
+  if [ -z $NEW_FILE_NAME ]; then 
+     NEW_FILE_NAME=$FILE
+  fi
+  cp $CURDIR/$FILE $ROOT/$NEW_FILE_NAME 2> /dev/null
   if [ $FILE_TO_SOURCE ]; then 
     grep "if \[ $ROOT/$FILE \]; then" $HOME/$FILE_TO_SOURCE >/dev/null
     if [ $? = 1 ]; then
@@ -79,13 +83,14 @@ function install_file
   fi
 }
 
-install_file $ROOT_DIR $SCRIPT_DIR prompt .bashrc
+install_file $ROOT_DIR $SCRIPT_DIR prompt prompt .bashrc
 #edit the prompt file
 install_var userColor $USERCOLOR $ROOT_DIR/prompt
 install_var hostColor $HOSTCOLOR $ROOT_DIR/prompt
 install_var wdColor $WDCOLOR $ROOT_DIR/prompt
 
-install_file $ROOT_DIR $SCRIPT_DIR startTmux .bashrc
+install_file $HOME $SCRIPT_DIR vimrc .vimrc
+install_file $ROOT_DIR $SCRIPT_DIR startTmux startTmux .bashrc
 #install tmux configuration file
 cp $CURDIR/tmux.conf $HOME/.tmux.conf 2> /dev/null
 cp $CURDIR/vimrc $ROOT/.vimrc 2> /dev/null
