@@ -6,49 +6,53 @@
 #Easy shortcuts to change the prompt colors
 #Available colors are:
 #   Black, Red, Green, Yellow, Blue, Purple, Cyan, White
-userColor=txtGreen
-hostColor=undGreen
-wdColor=txtCyan
+userColor=Yellow
+hostColor=uGreen
+wdColor=Cyan
+dateColor=DarkGrey
 
 #----------------------------------------------------------
 #TODO: Turn this into a meaningful array
-bldBlack='\[\e[0;30m\]' # Black - Regular
-bldRed='\[\e[0;31m\]' # Red
-bldGreen='\[\e[0;32m\]' # Green
-bldYellow='\[\e[0;33m\]' # Yellow
-bldBlue='\[\e[0;34m\]' # Blue
-bldPurple='\[\e[0;35m\]' # Purple
-bldCyan='\[\e[0;36m\]' # Cyan
-bldWhite='\[\e[0;37m\]' # White
-txtBlack='\[\e[1;30m\]' # Black - Bold
-txtRed='\[\e[1;31m\]' # Red
-txtGreen='\[\e[1;32m\]' # Green
-txtYellow='\[\e[1;33m\]' # Yellow
-txtBlue='\[\e[1;34m\]' # Blue
-txtPurple='\[\e[1;35m\]' # Purple
-txtCyan='\[\e[1;36m\]' # Cyan
-txtWhite='\[\e[1;37m\]' # White
-undBlack='\[\e[4;30m\]' # Black - Underline
-undRed='\[\e[4;31m\]' # Red
-undGreen='\[\e[4;32m\]' # Green
-undYellow='\[\e[4;33m\]' # Yellow
-undBlue='\[\e[4;34m\]' # Blue
-undPurple='\[\e[4;35m\]' # Purple
-undCyan='\[\e[4;36m\]' # Cyan
-undWhite='\[\e[4;37m\]' # White
-bgBlack='\[\e[40m\]'   # Black - Background
-bgRed='\[\e[41m\]'   # Red
-bgGreen='\[\e[42m\]'   # Green
-bgYellow='\[\e[43m\]'   # Yellow
-bgBlue='\[\e[44m\]'   # Blue
-bgPurple='\[\e[45m\]'   # Purple
-bgCyan='\[\e[46m\]'   # Cyan
-bgWhite='\[\e[47m\]'   # White
+Black='\[\e[0;30m\]'
+Red='\[\e[0;31m\]'
+Green='\[\e[0;32m\]'
+Yellow='\[\e[0;33m\]'
+Blue='\[\e[0;34m\]'
+Purple='\[\e[0;35m\]'
+Cyan='\[\e[0;36m\]'
+LightGrey='\[\e[0;37m\]'
+DarkGrey='\[\e[1;30m\]'
+LightRed='\[\e[1;31m\]'
+LightGreen='\[\e[1;32m\]'
+LightYellow='\[\e[1;33m\]'
+LightBlue='\[\e[1;34m\]'
+LightPurple='\[\e[1;35m\]'
+LightCyan='\[\e[1;36m\]'
+White='\[\e[1;37m\]'
+# --------  Underlined ------------
+uBlack='\[\e[4;30m\]'
+uRed='\[\e[4;31m\]'
+uGreen='\[\e[4;32m\]'
+uYellow='\[\e[4;33m\]'
+uBlue='\[\e[4;34m\]'
+uPurple='\[\e[4;35m\]'
+uCyan='\[\e[4;36m\]'
+uWhite='\[\e[4;37m\]'
+# --------  Background ------------
+bgBlack='\[\e[40m\]'
+bgRed='\[\e[41m\]'
+bgGreen='\[\e[42m\]'
+bgYellow='\[\e[43m\]'
+bgBlue='\[\e[44m\]'
+bgPurple='\[\e[45m\]'
+bgCyan='\[\e[46m\]'
+bgWhite='\[\e[47m\]'
 
 reset='\[\e[0m\]'    # Text Reset
 
 wd="${!wdColor}\w${reset}"
 user="${!userColor}\u${reset}"
 host="${!hostColor}\h${reset}"
+date="${!dateColor}/ \D{%M-%d-%Y %I:%M:%S %p} \\ ${reset}"
 
-export PS1="[${user} @ ${host} ]: ${wd}\n$"
+export PS1="${date}\n[${user} @ ${host} ]: ${wd}\n$"

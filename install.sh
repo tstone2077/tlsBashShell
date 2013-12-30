@@ -3,7 +3,7 @@
 
 
 if [ -z $1 ]; then
-  USERCOLOR="txtGreen"
+  USERCOLOR="Green"
 else
   if [ "$1" == "-u" ]; then
     echo Usage:
@@ -23,12 +23,12 @@ else
   fi
 fi
 if [ -z $2 ]; then
-  HOSTCOLOR="undGreen"
+  HOSTCOLOR="uGreen"
 else
   HOSTCOLOR=$2
 fi
 if [ -z $3 ]; then
-  WDCOLOR="txtCyan"
+  WDCOLOR="LightCyan"
 else
   WDCOLOR=$3
 fi
