@@ -9,7 +9,7 @@ else
     echo Usage:
     echo "  $0 [-u] : display usage"
     echo "  -- or --"
-    echo "  $0 [userColor] [hostColor] [workingDirColor]: if a color is present, it sets the respective color as such"
+    echo "  $0 [userColor] [hostColor] [workingDirColor] [gitBranchColor]: if a color is present, it sets the respective color as such"
     echo "  available colors:"
     for color in $(grep ".*=.*# " prompt  | sed 's/=.*//'); do
         if [ "$color" != "reset" ]; then
@@ -17,6 +17,7 @@ else
         fi
     done;
     echo ""
+    exit 0
 
   else
      USERCOLOR=$1
@@ -31,6 +32,16 @@ if [ -z $3 ]; then
   WDCOLOR="LightCyan"
 else
   WDCOLOR=$3
+fi
+if [ -z $4 ]; then
+  DATECOLOR="DarkGrey"
+else
+  DATECOLOR=$4
+fi
+if [ -z $5 ]; then
+  BRANCHCOLOR="Red"
+else
+  BRANCHCOLOR=$5
 fi
 
 USERNAME=$(basename $HOME)
@@ -93,9 +104,14 @@ install_file $ROOT_DIR $SCRIPT_DIR prompt prompt .bashrc
 install_var userColor $USERCOLOR $ROOT_DIR/prompt
 install_var hostColor $HOSTCOLOR $ROOT_DIR/prompt
 install_var wdColor $WDCOLOR $ROOT_DIR/prompt
+install_var dateColor $DATECOLOR $ROOT_DIR/prompt
+install_var branchColor $BRANCHCOLOR $ROOT_DIR/prompt
 
 install_file $HOME $SCRIPT_DIR vimrc .vimrc
 install_file $ROOT_DIR $SCRIPT_DIR startTmux startTmux .bashrc
+install_file $ROOT_DIR $SCRIPT_DIR git-completion.bash git-completion.bash .bashrc
+install_file $ROOT_DIR $SCRIPT_DIR git-prompt.sh git-prompt.sh .$USERNAME/prompt
+
 #install tmux configuration file
 cp $CURDIR/tmux.conf $HOME/.tmux.conf 2> /dev/null
 cp $CURDIR/vimrc $ROOT/.vimrc 2> /dev/null

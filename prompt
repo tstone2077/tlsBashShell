@@ -10,6 +10,7 @@ userColor=Yellow
 hostColor=uGreen
 wdColor=Cyan
 dateColor=DarkGrey
+branchColor=Red
 
 #----------------------------------------------------------
 #TODO: Turn this into a meaningful array
@@ -53,6 +54,6 @@ reset='\[\e[0m\]'    # Text Reset
 wd="${!wdColor}\w${reset}"
 user="${!userColor}\u${reset}"
 host="${!hostColor}\h${reset}"
-date="${!dateColor}/ \D{%M-%d-%Y %I:%M:%S %p} \\ ${reset}"
+date="${!dateColor}/ \D{%m-%d-%Y %I:%M:%S %p} \\ ${reset}"
 
-export PS1="${date}\n[${user} @ ${host} ]: ${wd}\n$"
+export PS1="${date}\n[${user} @ ${host} ]: ${wd}${!branchColor}"'$(__git_ps1 " (%s)")'"${reset}\n$"
